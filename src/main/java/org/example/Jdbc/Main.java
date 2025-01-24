@@ -1,6 +1,7 @@
 package org.example.Jdbc;
 
 import DAO.AnimalDAOImpl;
+import DAO.FamiliaDAO;
 import DAO.FamiliaDAOImpl;
 import entities.Animal;
 import entities.Familia;
@@ -9,7 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         AnimalDAOImpl animalDAO = new AnimalDAOImpl();
         FamiliaDAOImpl familiaDAO = new FamiliaDAOImpl();
@@ -26,7 +29,7 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    gestionarAnimales(animalDAO, scanner);
+                    gestionarAnimales(animalDAO, familiaDAO, scanner);  // Cambiado para pasar familiaDAO
                     break;
                 case 2:
                     gestionarFamilias(familiaDAO, scanner);
@@ -42,7 +45,7 @@ public class Main {
         scanner.close();
     }
 
-    private static void gestionarAnimales(AnimalDAOImpl animalDAO, Scanner scanner) {
+    private static void gestionarAnimales(AnimalDAOImpl animalDAO, FamiliaDAOImpl familiaDAO, Scanner scanner) {
         int opcion;
         do {
             System.out.println("\n=== Gestión de Animales ===");
@@ -71,15 +74,29 @@ public class Main {
                     System.out.print("Estado: ");
                     String estado = scanner.nextLine();
 
-                    Animal animal = new Animal();
-                    animal.setNombre(nombre);
-                    animal.setEspecie(especie);
-                    animal.setEdad(edad);
-                    animal.setDescripcion(descripcion);
-                    animal.setEstado(estado);
+                    // Solicitar ID de la Familia a la que pertenecerá el Animal
+                    System.out.print("ID de la Familia: ");
+                    Long familiaId = scanner.nextLong();
+                    scanner.nextLine(); // Consumir nueva línea
 
-                    animalDAO.save(animal);
-                    System.out.println("Animal agregado con éxito.");
+                    // Buscar la familia por el ID proporcionado usando familiaDAO
+                    Familia familia = familiaDAO.getById(familiaId);
+
+                    // Verificar si la familia existe
+                    if (familia != null) {
+                        Animal animal = new Animal();
+                        animal.setNombre(nombre);
+                        animal.setEspecie(especie);
+                        animal.setEdad(edad);
+                        animal.setDescripcion(descripcion);
+                        animal.setEstado(estado);
+                        animal.setFamilia(familia);
+
+                        animalDAO.save(animal);
+                        System.out.println("Animal agregado con éxito.");
+                    } else {
+                        System.out.println("Familia no encontrada. El animal no ha sido agregado.");
+                    }
                     break;
 
                 case 2:
