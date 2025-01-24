@@ -9,7 +9,12 @@ import entities.Familia;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase principal que permite gestionar animales y familias.
+ */
+
 public class Main {
+
 
     public static void main(String[] args) {
 
@@ -25,11 +30,11 @@ public class Main {
             System.out.println("0. Salir");
             System.out.print("Elige una opción: ");
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir nueva línea
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
-                    gestionarAnimales(animalDAO, familiaDAO, scanner);  // Cambiado para pasar familiaDAO
+                    gestionarAnimales(animalDAO, familiaDAO, scanner);
                     break;
                 case 2:
                     gestionarFamilias(familiaDAO, scanner);
@@ -45,6 +50,12 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Gestiona a los animales
+     * @param animalDAO El objeto que gestiona las operaciones con animales.
+     * @param familiaDAO El objeto que gestiona las operaciones con familias.
+     * @param scanner El objeto Scanner para obtener entradas del usuario.
+     */
     private static void gestionarAnimales(AnimalDAOImpl animalDAO, FamiliaDAOImpl familiaDAO, Scanner scanner) {
         int opcion;
         do {
@@ -68,21 +79,21 @@ public class Main {
                     String especie = scanner.nextLine();
                     System.out.print("Edad: ");
                     int edad = scanner.nextInt();
-                    scanner.nextLine(); // Consumir nueva línea
+                    scanner.nextLine();
                     System.out.print("Descripción: ");
                     String descripcion = scanner.nextLine();
                     System.out.print("Estado: ");
                     String estado = scanner.nextLine();
 
-                    // Solicitar ID de la Familia a la que pertenecerá el Animal
+
                     System.out.print("ID de la Familia: ");
                     Long familiaId = scanner.nextLong();
-                    scanner.nextLine(); // Consumir nueva línea
+                    scanner.nextLine();
 
-                    // Buscar la familia por el ID proporcionado usando familiaDAO
+
                     Familia familia = familiaDAO.getById(familiaId);
 
-                    // Verificar si la familia existe
+
                     if (familia != null) {
                         Animal animal = new Animal();
                         animal.setNombre(nombre);
@@ -171,6 +182,11 @@ public class Main {
         } while (opcion != 0);
     }
 
+    /**
+     * Gestiona las operaciones relacionadas con las familias,
+     * @param familiaDAO El objeto que gestiona las operaciones con familias.
+     * @param scanner El objeto Scanner para obtener entradas del usuario.
+     */
     private static void gestionarFamilias(FamiliaDAOImpl familiaDAO, Scanner scanner) {
         int opcion;
         do {

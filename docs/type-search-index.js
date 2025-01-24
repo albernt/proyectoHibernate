@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"entities","l":"Animal"},{"p":"DAO","l":"AnimalDAO"},{"p":"DAO","l":"AnimalDAOImpl"},{"p":"entities","l":"Familia"},{"p":"DAO","l":"FamiliaDAO"},{"p":"DAO","l":"FamiliaDAOImpl"},{"p":"Util","l":"HibernateUtil"},{"p":"org.example.Jdbc","l":"Main"}];updateSearchResults();

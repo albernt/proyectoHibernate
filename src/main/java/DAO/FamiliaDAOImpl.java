@@ -9,6 +9,11 @@ import java.util.List;
 
 public class FamiliaDAOImpl implements FamiliaDAO {
 
+    /**
+     * Guarda un nuevo objeto Familia en la base de datos.
+     *
+     * @param familia El objeto Familia que se desea guardar.
+     */
     @Override
     public void save(Familia familia) {
         Transaction transaction = null;
@@ -22,6 +27,12 @@ public class FamiliaDAOImpl implements FamiliaDAO {
         }
     }
 
+    /**
+     * Obtiene un objeto Familia por su ID.
+     *
+     * @param id El ID de la familia a buscar.
+     * @return El objeto Familia correspondiente al ID, o null si no se encuentra.
+     */
     @Override
     public Familia getById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -32,6 +43,11 @@ public class FamiliaDAOImpl implements FamiliaDAO {
         }
     }
 
+    /**
+     * Obtiene todas las familias de la base de datos.
+     *
+     * @return Una lista con todos los objetos Familia.
+     */
     @Override
     public List<Familia> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -42,6 +58,11 @@ public class FamiliaDAOImpl implements FamiliaDAO {
         }
     }
 
+    /**
+     * Actualiza un objeto Familia en la base de datos.
+     *
+     * @param familia El objeto Familia con los datos actualizados.
+     */
     @Override
     public void update(Familia familia) {
         Transaction transaction = null;
@@ -55,6 +76,11 @@ public class FamiliaDAOImpl implements FamiliaDAO {
         }
     }
 
+    /**
+     * Elimina un objeto Familia de la base de datos.
+     *
+     * @param familia El objeto Familia que se desea eliminar.
+     */
     @Override
     public void delete(Familia familia) {
         Transaction transaction = null;
