@@ -20,6 +20,7 @@ public class AnimalDAOImpl implements AnimalDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
+            System.err.println("Error al guardar el animal: " + e.getMessage());
             e.printStackTrace();
         }
     }
